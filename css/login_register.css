@@ -1,0 +1,18 @@
+@media (max-width: 337px) and (max-height: 666px) {
+  body {
+    background-color: black;
+    position: relative;
+    margin: 0;
+  }
+
+  .container {
+    height: 100vh;
+    border-radius: 20px;
+    padding: 10px 18px;
+    box-sizing: border-box;
+  }
+
+  .login-container {
+    background-color: rgb(159, 252, 215);
+  }
+}

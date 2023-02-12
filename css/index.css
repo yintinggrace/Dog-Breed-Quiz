@@ -1,0 +1,49 @@
+@font-face {
+  font-family: 'Roboto Condensed 300';
+  src: url('../fonts/RobotoCondensed_light/RobotoCondensedLight.eot');
+  src: url('../fonts/RobotoCondensed_light/RobotoCondensedLight.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/RobotoCondensed_light/RobotoCondensedLight.woff2') format('woff2'),
+    url('../fonts/RobotoCondensed_light/RobotoCondensedLight.woff') format('woff'),
+    url('../fonts/RobotoCondensed_light/RobotoCondensedLight.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Roboto Condensed 400';
+  src: url('../fonts/RobotoCondensed_regular/RobotoCondensedRegular.eot');
+  src: url('../fonts/RobotoCondensed_regular/RobotoCondensedRegular.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/RobotoCondensed_regular/RobotoCondensedRegular.woff2') format('woff2'),
+    url('../fonts/RobotoCondensed_regular/RobotoCondensedRegular.woff') format('woff'),
+    url('../fonts/RobotoCondensed_regular/RobotoCondensedRegular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Roboto Condensed 700';
+  src: url('../fonts/RobotoCondensed_bold/RobotoCondensedBold.eot');
+  src: url('../fonts/RobotoCondensed_bold/RobotoCondensedBold.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/RobotoCondensed_bold/RobotoCondensedBold.woff2') format('woff2'),
+    url('../fonts/RobotoCondensed_bold/RobotoCondensedBold.woff') format('woff'),
+    url('../fonts/RobotoCondensed_bold/RobotoCondensedBold.ttf') format('truetype');
+}
+
+* {
+  font-family: 'Roboto Condensed 400';
+}
+
+body {
+  margin: 1vh 5vw;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dog-logo {
+  height: 4.8vh;
+  width: 4.8vh;
+}
+
+footer {
+  font-size: 2.2vh;
+}
