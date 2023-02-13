@@ -3,6 +3,8 @@
 const loginPage = document.querySelector("body");
 
 loginPage.querySelector(".to-register-page").addEventListener("click", showRegisterPage);
+loginPage.querySelector(".login-button").addEventListener("click", loginWithAccount);
+
 
 /* Go to register page from login page */
 function showRegisterPage() {
@@ -48,6 +50,16 @@ function showLoginPage() {
   loginButton.classList.add("login-button");
   loginButton.textContent = "Login";
   loginPage.querySelector(".register-button").replaceWith(loginButton);
+}
+
+/* Login with account */
+async function loginWithAccount() {
+  const usernameInput = document.querySelector("input[name='username']").value;
+  const passwordInput = document.querySelector("input[name='password']").value;
+
+  const getRequest = `${prefix}?action=check_credentials&user_name=${usernameInput}&password=${passwordInput}`;
+
+  const response = await login(getRequest);
 }
 
 async function registerNewUser() {
