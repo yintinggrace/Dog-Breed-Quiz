@@ -65,4 +65,63 @@ async function registerNewUser() {
   });
 
   const response = await register(postRequest);
+
+  // Register successfully
+  if (response.ok) {
+    document.querySelector(".alert-container").classList.add("alert-container-visible");
+    document.querySelector(".alert-box").classList.add("alert-box-visible");
+    document.querySelector(".alert-box").classList.add("contacting-server");
+    document.querySelector(".alert-text").textContent = "Contacting Server...";
+
+    setTimeout(() => {
+      document.querySelector(".alert-box").classList.remove("contacting-server");
+      document.querySelector(".alert-text").innerHTML = `Registration Complete. <br>Please proceed to login.`;
+      document.querySelector(".alert-close").classList.remove("hidden");
+    }, 1000);
+
+    setTimeout(() => {
+      document.querySelector(".alert-close").addEventListener("click", closeAlert);
+    }, 1200);
+  }
+
+  // The user_name is already in the register
+  else if (response.status === 409) {
+    document.querySelector(".alert-container").classList.add("alert-container-visible");
+    document.querySelector(".alert-box").classList.add("alert-box-visible");
+    document.querySelector(".alert-box").classList.add("contacting-server");
+    document.querySelector(".alert-text").textContent = "Contacting Server...";
+
+    setTimeout(() => {
+      document.querySelector(".alert-box").classList.remove("contacting-server");
+      document.querySelector(".alert-text").innerHTML = `Sorry! That name is taken. <br>Please try with another one.`;
+      document.querySelector(".alert-close").classList.remove("hidden");
+    }, 1000);
+
+    setTimeout(() => {
+      document.querySelector(".alert-close").addEventListener("click", closeAlert);
+    }, 1200);
+  }
+
+  // Malfunction
+  else if (response.status === 418) {
+    document.querySelector(".alert-container").classList.add("alert-container-visible");
+    document.querySelector(".alert-box").classList.add("alert-box-visible");
+    document.querySelector(".alert-box").classList.add("contacting-server");
+    document.querySelector(".alert-text").textContent = "Contacting Server...";
+
+    setTimeout(() => {
+      document.querySelector(".alert-box").classList.remove("contacting-server");
+      document.querySelector(".alert-text").textContent = "The server thinks it's not a teapot!";
+      document.querySelector(".alert-close").classList.remove("hidden");
+    }, 1000);
+
+    setTimeout(() => {
+      document.querySelector(".alert-close").addEventListener("click", closeAlert);
+    }, 1200);
+  }
+}
+
+function closeAlert() {
+  document.querySelector(".alert-container").classList.remove("alert-container-visible");
+  document.querySelector(".alert-close").classList.add("hidden");
 }
