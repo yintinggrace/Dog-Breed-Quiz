@@ -9,10 +9,40 @@ function showQuizPage() {
   document.querySelector(".name-logout").classList.remove("hidden");
   document.querySelector("main").innerHTML = `
     <img class="dog-background-image" src="media/logo.png" alt="dog_logo">
+    <div class="options"></div>
   `;
   setTimeout(() => {
     document.querySelector(".alert-container").classList.remove("alert-container-visible");
+    const animalOptions = getRandomFourAnimals();
+    createQuizButton(animalOptions);
   }, 500);
+}
+
+function createQuizButton(animalOptions) {
+  for (let i = 0; i < 4; i++) {
+    const quizButton = document.createElement("button");
+    quizButton.classList.add("quiz-option");
+    quizButton.textContent = animalOptions[i].name;
+    document.querySelector(".options").append(quizButton);
+  }
+}
+
+function getRandomFourAnimals() {
+  let randomQuizOptions = [];
+  for (let i = 0; i < 4; i++) {
+    const randomAnimal = arrayRandomElement(ALL_BREEDS);
+    randomQuizOptions.push(randomAnimal);
+  }
+  return randomQuizOptions;
+}
+
+function arrayRandomElement(array) {
+  const randomIndex = getRandomNumber(array.length);
+  return array[randomIndex];
+}
+
+function getRandomNumber(max, min = 0) {
+  return min + Math.floor(max * Math.random());
 }
 
 function logoutFromAccount() {

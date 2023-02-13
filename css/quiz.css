@@ -1,6 +1,8 @@
 @media (max-width: 337px) and (max-height: 666px) {
   main {
     height: 75vh;
+    display: flex;
+    justify-content: flex-end;
   }
 
   .quiz-container {
@@ -30,5 +32,22 @@
 
   .logout-button {
     font-size: 2.7vh;
+  }
+
+  .options {
+    gap: 7px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    z-index: 1;
+  }
+
+  .quiz-option {
+    font-size: 3vh;
+    height: 8vh;
+    width: 48%;
+    background-color: rgb(234, 233, 237);
+    border-radius: 5px;
+    border: 1px solid gray;
   }
 }
