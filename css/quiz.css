@@ -1,8 +1,8 @@
 @media (max-width: 337px) and (max-height: 666px) {
   main {
-    height: 75vh;
     display: flex;
     justify-content: flex-end;
+    flex-grow: 1;
   }
 
   .quiz-container {
@@ -49,5 +49,10 @@
     background-color: rgb(234, 233, 237);
     border-radius: 5px;
     border: 1px solid gray;
+  }
+
+  .shown-dog-picture {
+    border-radius: 15px;
+    margin-bottom: 2vh;
   }
 }
