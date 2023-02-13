@@ -24,6 +24,8 @@ function showRegisterPage() {
   registerButton.classList.add("register-button");
   registerButton.textContent = "Register";
   loginPage.querySelector(".login-button").replaceWith(registerButton);
+
+  document.querySelector(".register-button").addEventListener("click", registerNewUser);
 }
 
 /* Go to login page from register page*/
@@ -46,4 +48,21 @@ function showLoginPage() {
   loginButton.classList.add("login-button");
   loginButton.textContent = "Login";
   loginPage.querySelector(".register-button").replaceWith(loginButton);
+}
+
+async function registerNewUser() {
+  const usernameInput = document.querySelector("input[name='username']").value;
+  const passwordInput = document.querySelector("input[name='password']").value;
+
+  const postRequest = new Request(prefix, {
+    method: "POST",
+    headers: { "Content-type": "application/json; charset=UTF-8" },
+    body: JSON.stringify({
+      action: "register",
+      user_name: usernameInput,
+      password: passwordInput,
+    }),
+  });
+
+  const response = await register(postRequest);
 }
