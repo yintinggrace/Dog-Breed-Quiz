@@ -60,6 +60,53 @@ async function loginWithAccount() {
   const getRequest = `${prefix}?action=check_credentials&user_name=${usernameInput}&password=${passwordInput}`;
 
   const response = await login(getRequest);
+
+  if (response.ok) {
+    document.querySelector(".alert-container").classList.add("alert-container-visible");
+    document.querySelector(".alert-box").classList.add("alert-box-visible");
+    document.querySelector(".alert-box").classList.add("contacting-server");
+    document.querySelector(".alert-text").textContent = "Contacting Server...";
+
+    setTimeout(() => {
+      showQuizPage();
+    }, 1000);
+  }
+
+  // Non-existed username or wrong password
+  else if (response.status === 404) {
+    document.querySelector(".alert-container").classList.add("alert-container-visible");
+    document.querySelector(".alert-box").classList.add("alert-box-visible");
+    document.querySelector(".alert-box").classList.add("contacting-server");
+    document.querySelector(".alert-text").textContent = "Contacting Server...";
+
+    setTimeout(() => {
+      document.querySelector(".alert-container").classList.remove("alert-container-visible");
+    }, 1000);
+
+    setTimeout(() => {
+      document.querySelector(".slogan").textContent = "Wrong user name or password."
+      document.querySelector(".slogan").style.backgroundColor = "white";
+      document.querySelector(".slogan").style.padding = "6px";
+    }, 1100);
+  }
+
+  // Malfunction
+  else if (response.status === 418) {
+    document.querySelector(".alert-container").classList.add("alert-container-visible");
+    document.querySelector(".alert-box").classList.add("alert-box-visible");
+    document.querySelector(".alert-box").classList.add("contacting-server");
+    document.querySelector(".alert-text").textContent = "Contacting Server...";
+
+    setTimeout(() => {
+      document.querySelector(".alert-box").classList.remove("contacting-server");
+      document.querySelector(".alert-text").textContent = "The server thinks it's not a teapot!";
+      document.querySelector(".alert-close").classList.remove("hidden");
+    }, 1000);
+
+    setTimeout(() => {
+      document.querySelector(".alert-close").addEventListener("click", closeAlert);
+    }, 1200);
+  }
 }
 
 async function registerNewUser() {
