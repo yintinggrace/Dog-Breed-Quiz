@@ -4,6 +4,7 @@ function showQuizPage() {
   loginPage.querySelector(".container").classList.remove("login-container");
   loginPage.querySelector(".container").classList.add("quiz-container");
   document.querySelector(".alert-text").textContent = "Getting a random image...";
+  document.querySelector(".name-logout").classList.remove("hidden");
   document.querySelector("main").innerHTML = `
     <img class="dog-background-image" src="media/logo.png" alt="dog_logo">
   `;

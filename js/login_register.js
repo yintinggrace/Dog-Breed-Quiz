@@ -4,7 +4,12 @@ const loginPage = document.querySelector("body");
 
 loginPage.querySelector(".to-register-page").addEventListener("click", showRegisterPage);
 loginPage.querySelector(".login-button").addEventListener("click", loginWithAccount);
+loginPage.querySelector("input[name = 'username']").addEventListener("keyup", printUsername);
 
+function printUsername(event) {
+  const userName = event.target.value;
+  document.querySelector(".userName").textContent = userName;
+}
 
 /* Go to register page from login page */
 function showRegisterPage() {
