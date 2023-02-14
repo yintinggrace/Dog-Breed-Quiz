@@ -1,4 +1,8 @@
 "use strict"
+if (window.localStorage.getItem("isLoggedIn")) {
+  showQuizPage();
+  document.querySelector(".userName").textContent = localStorage.getItem("userName");
+};
 
 document.querySelector(".logout-button").addEventListener("click", logoutFromAccount);
 
@@ -113,6 +117,9 @@ function showNextQuestion(event) {
 }
 
 function logoutFromAccount() {
+  window.localStorage.removeItem("isLoggedIn");
+  document.querySelector(".userName").textContent = localStorage.removeItem("userName");
+
   document.querySelector("body").innerHTML = `
     <div class="container login-container">
       <header>
@@ -159,5 +166,4 @@ function logoutFromAccount() {
   loginPage.querySelector(".login-button").addEventListener("click", loginWithAccount);
   loginPage.querySelector("input[name = 'username']").addEventListener("keyup", printUsername);
   loginPage.querySelector(".logout-button").addEventListener("click", logoutFromAccount);
-
 }

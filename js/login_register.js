@@ -9,6 +9,7 @@ loginPage.querySelector("input[name = 'username']").addEventListener("keyup", pr
 function printUsername(event) {
   const userName = event.target.value;
   document.querySelector(".userName").textContent = userName;
+  localStorage.setItem("userName", userName);
 }
 
 /* Go to register page from login page */
@@ -67,6 +68,7 @@ async function loginWithAccount() {
   const response = await login(getRequest);
 
   if (response.ok) {
+    window.localStorage.setItem("isLoggedIn", true);
     document.querySelector(".alert-container").classList.add("alert-container-visible");
     document.querySelector(".alert-box").classList.add("alert-box-visible");
     document.querySelector(".alert-box").classList.add("contacting-server");
