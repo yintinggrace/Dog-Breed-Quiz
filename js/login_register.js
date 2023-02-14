@@ -18,6 +18,7 @@ function showRegisterPage() {
   loginPage.querySelector(".container").classList.remove("login-container");
   loginPage.querySelector("h1").textContent = "REGISTER";
   loginPage.querySelector(".slogan").textContent = "Ready when you are...";
+  loginPage.querySelector(".slogan").style.backgroundColor = "transparent";
   loginPage.querySelector(".to-register-page").textContent = "Already have an account? Go to login";
   loginPage.querySelector("input[name = 'username']").value = "";
   loginPage.querySelector("input[name = 'password']").value = "";

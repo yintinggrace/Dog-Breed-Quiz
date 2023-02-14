@@ -146,7 +146,7 @@ function logoutFromAccount() {
         <div class="to-register-page">New to this? Register for free</div>
       </main>
 
-      <footer>The Dog Breed Quiz is made possible thanks to the free API by <a href="#">DOG CEO Zine</a></footer>
+      <footer>The Dog Breed Quiz is made possible thanks to the free API by <a href="https://dog.ceo/dog-api/">DOG CEO Zine</a></footer>
 
       <!-- Alert messages -->
 
