@@ -139,7 +139,8 @@
     text-align: center;
   }
 
-  .contacting-server {
+  .contacting-server,
+  .get-random-image {
     top: 45vh;
     height: 11vh;
   }

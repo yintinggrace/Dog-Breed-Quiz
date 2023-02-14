@@ -107,13 +107,14 @@ function tellCorrectOrNot(event) {
   }
 }
 
-function showNextQuestion(event) {
-  console.log(event);
-  showQuizPage();
+function showNextQuestion() {
   document.querySelector(".alert-box").classList.remove("correct");
   document.querySelector(".alert-box").classList.remove("wrong");
   document.querySelector(".alert-close").classList.add("hidden");
-  document.querySelector(".alert-box").classList.add("contacting-server");
+  document.querySelector(".alert-box").classList.add("get-random-image");
+  document.querySelector(".alert-text").textContent = "Getting a random image...";
+
+  showQuizPage();
 }
 
 function logoutFromAccount() {
