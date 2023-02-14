@@ -56,6 +56,8 @@ function showLoginPage() {
   loginButton.classList.add("login-button");
   loginButton.textContent = "Login";
   loginPage.querySelector(".register-button").replaceWith(loginButton);
+
+  loginPage.querySelector(".login-button").addEventListener("click", loginWithAccount);
 }
 
 /* Login with account */
