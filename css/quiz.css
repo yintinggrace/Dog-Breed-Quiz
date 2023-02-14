@@ -55,4 +55,16 @@
     border-radius: 15px;
     margin-bottom: 2vh;
   }
+
+  .correct {
+    background-color: rgb(117, 251, 140);
+    top: 40vh;
+    height: 21vh;
+  }
+
+  .wrong {
+    background-color: rgb(197, 111, 52);
+    top: 40vh;
+    height: 21vh;
+  }
 }

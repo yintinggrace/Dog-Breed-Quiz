@@ -40,6 +40,7 @@ function createQuizButton(dogOptions) {
     quizButton.classList.add("quiz-option");
     quizButton.textContent = dogOptions[i].name;
     document.querySelector(".options").append(quizButton);
+    quizButton.addEventListener("click", tellCorrectOrNot);
   }
 }
 
@@ -75,6 +76,35 @@ function arrayRandomElement(array) {
 
 function getRandomNumber(max, min = 0) {
   return min + Math.floor(max * Math.random());
+}
+
+function tellCorrectOrNot(event) {
+  const chosenDogOption = event.target.textContent.split(' ');;
+  const shownDog = document.querySelector(".shown-dog-picture").src;
+  if (shownDog.includes(chosenDogOption[0]) && shownDog.includes(chosenDogOption[1])) {
+    // Correct answer
+    document.querySelector(".alert-container").classList.add("alert-container-visible");
+    document.querySelector(".alert-box").classList.add("alert-box-visible");
+    document.querySelector(".alert-box").classList.add("correct");
+    document.querySelector(".alert-close").classList.remove("hidden");
+    document.querySelector(".alert-text").textContent = "CORRECT!";
+    document.querySelector(".alert-close").textContent = "ONE MORE";
+    document.querySelector(".alert-close").addEventListener("click", showNextQuestion);
+
+  } else {
+    // Wrong answer
+    document.querySelector(".alert-container").classList.add("alert-container-visible");
+    document.querySelector(".alert-box").classList.add("alert-box-visible");
+    document.querySelector(".alert-box").classList.add("wrong");
+    document.querySelector(".alert-close").classList.remove("hidden");
+    document.querySelector(".alert-text").textContent = "I'm afraid not...:-(";
+    document.querySelector(".alert-close").textContent = "ONE MORE";
+    document.querySelector(".alert-close").addEventListener("click", showNextQuestion);
+  }
+}
+
+function showNextQuestion(event) {
+  console.log(event);
 }
 
 function logoutFromAccount() {
