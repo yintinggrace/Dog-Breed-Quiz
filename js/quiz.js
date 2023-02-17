@@ -55,7 +55,7 @@ function getOneRandomDogFromQuizOptions(dogOptions) {
 
 async function getDog(shownDog) {
   const breedArrayRequest = `https://dog.ceo/api/breed/${shownDog.url}/images`;
-  const response = await getBreedArray(breedArrayRequest);
+  const response = await connect(breedArrayRequest);
   const resource = await response.json();
   const breedArray = resource.message;
   const randomDogFromBreedArray = arrayRandomElement(breedArray);

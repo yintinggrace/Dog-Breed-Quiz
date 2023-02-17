@@ -68,7 +68,7 @@ async function loginWithAccount() {
 
   const getRequest = `${prefix}?action=check_credentials&user_name=${usernameInput}&password=${passwordInput}`;
 
-  const response = await login(getRequest);
+  const response = await connect(getRequest);
 
   if (response.ok) {
     window.localStorage.setItem("isLoggedIn", true);
@@ -133,7 +133,7 @@ async function registerNewUser() {
     }),
   });
 
-  const response = await register(postRequest);
+  const response = await connect(postRequest);
 
   // Register successfully
   if (response.ok) {
