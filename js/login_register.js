@@ -61,6 +61,13 @@ function showLoginPage() {
   loginPage.querySelector(".login-button").addEventListener("click", loginWithAccount);
 }
 
+function callContactingServer() {
+  document.querySelector(".alert-container").classList.add("alert-container-visible");
+  document.querySelector(".alert-box").classList.add("alert-box-visible");
+  document.querySelector(".alert-box").classList.add("contacting-server");
+  document.querySelector(".alert-text").textContent = "Contacting Server...";
+}
+
 /* Login with account */
 async function loginWithAccount() {
   const usernameInput = document.querySelector("input[name='username']").value;
@@ -72,10 +79,7 @@ async function loginWithAccount() {
 
   if (response.ok) {
     window.localStorage.setItem("isLoggedIn", true);
-    document.querySelector(".alert-container").classList.add("alert-container-visible");
-    document.querySelector(".alert-box").classList.add("alert-box-visible");
-    document.querySelector(".alert-box").classList.add("contacting-server");
-    document.querySelector(".alert-text").textContent = "Contacting Server...";
+    callContactingServer();
 
     setTimeout(() => {
       showQuizPage();
@@ -84,10 +88,7 @@ async function loginWithAccount() {
 
   // Non-existed username or wrong password
   else if (response.status === 404) {
-    document.querySelector(".alert-container").classList.add("alert-container-visible");
-    document.querySelector(".alert-box").classList.add("alert-box-visible");
-    document.querySelector(".alert-box").classList.add("contacting-server");
-    document.querySelector(".alert-text").textContent = "Contacting Server...";
+    callContactingServer();
 
     setTimeout(() => {
       document.querySelector(".alert-container").classList.remove("alert-container-visible");
@@ -102,10 +103,7 @@ async function loginWithAccount() {
 
   // Malfunction
   else if (response.status === 418) {
-    document.querySelector(".alert-container").classList.add("alert-container-visible");
-    document.querySelector(".alert-box").classList.add("alert-box-visible");
-    document.querySelector(".alert-box").classList.add("contacting-server");
-    document.querySelector(".alert-text").textContent = "Contacting Server...";
+    callContactingServer();
 
     setTimeout(() => {
       document.querySelector(".alert-box").classList.remove("contacting-server");
@@ -137,10 +135,7 @@ async function registerNewUser() {
 
   // Register successfully
   if (response.ok) {
-    document.querySelector(".alert-container").classList.add("alert-container-visible");
-    document.querySelector(".alert-box").classList.add("alert-box-visible");
-    document.querySelector(".alert-box").classList.add("contacting-server");
-    document.querySelector(".alert-text").textContent = "Contacting Server...";
+    callContactingServer();
 
     setTimeout(() => {
       document.querySelector(".alert-box").classList.remove("contacting-server");
@@ -155,10 +150,7 @@ async function registerNewUser() {
 
   // The user_name is already in the register
   else if (response.status === 409) {
-    document.querySelector(".alert-container").classList.add("alert-container-visible");
-    document.querySelector(".alert-box").classList.add("alert-box-visible");
-    document.querySelector(".alert-box").classList.add("contacting-server");
-    document.querySelector(".alert-text").textContent = "Contacting Server...";
+    callContactingServer();
 
     setTimeout(() => {
       document.querySelector(".alert-box").classList.remove("contacting-server");
@@ -173,10 +165,7 @@ async function registerNewUser() {
 
   // Malfunction
   else if (response.status === 418) {
-    document.querySelector(".alert-container").classList.add("alert-container-visible");
-    document.querySelector(".alert-box").classList.add("alert-box-visible");
-    document.querySelector(".alert-box").classList.add("contacting-server");
-    document.querySelector(".alert-text").textContent = "Contacting Server...";
+    callContactingServer();
 
     setTimeout(() => {
       document.querySelector(".alert-box").classList.remove("contacting-server");
