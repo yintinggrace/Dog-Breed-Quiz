@@ -68,6 +68,13 @@ function callContactingServer() {
   document.querySelector(".alert-text").textContent = "Contacting Server...";
 }
 
+function callMalfunction() {
+  document.querySelector(".alert-box").classList.remove("contacting-server");
+  document.querySelector(".alert-text").textContent = "The server thinks it's not a teapot!";
+  document.querySelector(".alert-close").classList.remove("hidden");
+  document.querySelector(".alert-close").addEventListener("click", closeAlert);
+}
+
 /* Login with account */
 async function loginWithAccount() {
   const usernameInput = document.querySelector("input[name='username']").value;
@@ -94,10 +101,7 @@ async function loginWithAccount() {
 
   // Malfunction
   else if (response.status === 418) {
-    document.querySelector(".alert-box").classList.remove("contacting-server");
-    document.querySelector(".alert-text").textContent = "The server thinks it's not a teapot!";
-    document.querySelector(".alert-close").classList.remove("hidden");
-    document.querySelector(".alert-close").addEventListener("click", closeAlert);
+    callMalfunction();
   }
 }
 
@@ -137,10 +141,7 @@ async function registerNewUser() {
 
   // Malfunction
   else if (response.status === 418) {
-    document.querySelector(".alert-box").classList.remove("contacting-server");
-    document.querySelector(".alert-text").textContent = "The server thinks it's not a teapot!";
-    document.querySelector(".alert-close").classList.remove("hidden");
-    document.querySelector(".alert-close").addEventListener("click", closeAlert);
+    callMalfunction();
   }
 }
 
