@@ -75,45 +75,29 @@ async function loginWithAccount() {
 
   const getRequest = `${prefix}?action=check_credentials&user_name=${usernameInput}&password=${passwordInput}`;
 
+  callContactingServer();
+
   const response = await connect(getRequest);
 
   if (response.ok) {
     window.localStorage.setItem("isLoggedIn", true);
-    callContactingServer();
-
-    setTimeout(() => {
-      showQuizPage();
-    }, 1000);
+    showQuizPage();
   }
 
   // Non-existed username or wrong password
   else if (response.status === 404) {
-    callContactingServer();
-
-    setTimeout(() => {
-      document.querySelector(".alert-container").classList.remove("alert-container-visible");
-    }, 1000);
-
-    setTimeout(() => {
-      document.querySelector(".slogan").textContent = "Wrong user name or password."
-      document.querySelector(".slogan").style.backgroundColor = "white";
-      document.querySelector(".slogan").style.padding = "6px";
-    }, 1100);
+    document.querySelector(".alert-container").classList.remove("alert-container-visible");
+    document.querySelector(".slogan").textContent = "Wrong user name or password."
+    document.querySelector(".slogan").style.backgroundColor = "white";
+    document.querySelector(".slogan").style.padding = "6px";
   }
 
   // Malfunction
   else if (response.status === 418) {
-    callContactingServer();
-
-    setTimeout(() => {
-      document.querySelector(".alert-box").classList.remove("contacting-server");
-      document.querySelector(".alert-text").textContent = "The server thinks it's not a teapot!";
-      document.querySelector(".alert-close").classList.remove("hidden");
-    }, 1000);
-
-    setTimeout(() => {
-      document.querySelector(".alert-close").addEventListener("click", closeAlert);
-    }, 1200);
+    document.querySelector(".alert-box").classList.remove("contacting-server");
+    document.querySelector(".alert-text").textContent = "The server thinks it's not a teapot!";
+    document.querySelector(".alert-close").classList.remove("hidden");
+    document.querySelector(".alert-close").addEventListener("click", closeAlert);
   }
 }
 
@@ -131,51 +115,32 @@ async function registerNewUser() {
     }),
   });
 
+  callContactingServer();
+
   const response = await connect(postRequest);
 
   // Register successfully
   if (response.ok) {
-    callContactingServer();
-
-    setTimeout(() => {
-      document.querySelector(".alert-box").classList.remove("contacting-server");
-      document.querySelector(".alert-text").innerHTML = `Registration Complete. <br>Please proceed to login.`;
-      document.querySelector(".alert-close").classList.remove("hidden");
-    }, 1000);
-
-    setTimeout(() => {
-      document.querySelector(".alert-close").addEventListener("click", closeAlert);
-    }, 1200);
+    document.querySelector(".alert-box").classList.remove("contacting-server");
+    document.querySelector(".alert-text").innerHTML = `Registration Complete. <br>Please proceed to login.`;
+    document.querySelector(".alert-close").classList.remove("hidden");
+    document.querySelector(".alert-close").addEventListener("click", closeAlert);
   }
 
   // The user_name is already in the register
   else if (response.status === 409) {
-    callContactingServer();
-
-    setTimeout(() => {
-      document.querySelector(".alert-box").classList.remove("contacting-server");
-      document.querySelector(".alert-text").innerHTML = `Sorry! That name is taken. <br>Please try with another one.`;
-      document.querySelector(".alert-close").classList.remove("hidden");
-    }, 1000);
-
-    setTimeout(() => {
-      document.querySelector(".alert-close").addEventListener("click", closeAlert);
-    }, 1200);
+    document.querySelector(".alert-box").classList.remove("contacting-server");
+    document.querySelector(".alert-text").innerHTML = `Sorry! That name is taken. <br>Please try with another one.`;
+    document.querySelector(".alert-close").classList.remove("hidden");
+    document.querySelector(".alert-close").addEventListener("click", closeAlert);
   }
 
   // Malfunction
   else if (response.status === 418) {
-    callContactingServer();
-
-    setTimeout(() => {
-      document.querySelector(".alert-box").classList.remove("contacting-server");
-      document.querySelector(".alert-text").textContent = "The server thinks it's not a teapot!";
-      document.querySelector(".alert-close").classList.remove("hidden");
-    }, 1000);
-
-    setTimeout(() => {
-      document.querySelector(".alert-close").addEventListener("click", closeAlert);
-    }, 1200);
+    document.querySelector(".alert-box").classList.remove("contacting-server");
+    document.querySelector(".alert-text").textContent = "The server thinks it's not a teapot!";
+    document.querySelector(".alert-close").classList.remove("hidden");
+    document.querySelector(".alert-close").addEventListener("click", closeAlert);
   }
 }
 
