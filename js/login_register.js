@@ -75,7 +75,50 @@ function callMalfunction() {
   document.querySelector(".alert-close").addEventListener("click", closeAlert);
 }
 
-/* Login with account */
+function showLoginErrorMessage(status) {
+  switch (status) {
+    // Non-existing username or wrong password
+    case 404:
+      document.querySelector(".alert-container").classList.remove("alert-container-visible");
+      document.querySelector(".slogan").textContent = "Wrong user name or password."
+      document.querySelector(".slogan").style.backgroundColor = "white";
+      document.querySelector(".slogan").style.padding = "6px";
+      break;
+
+    // Malfunction
+    case 418:
+      callMalfunction();
+      break;
+  }
+}
+
+function displayRegisterResult(status) {
+  switch (status) {
+    case 200:
+      document.querySelector(".alert-box").classList.remove("contacting-server");
+      document.querySelector(".alert-text").innerHTML = `Registration Complete. <br>Please proceed to login.`;
+      document.querySelector(".alert-close").classList.remove("hidden");
+      document.querySelector(".alert-close").addEventListener("click", closeAlert);
+      break;
+
+    // The user_name is already in the register
+    case 409:
+      document.querySelector(".alert-box").classList.remove("contacting-server");
+      document.querySelector(".alert-text").innerHTML = `Sorry! That name is taken. <br>Please try with another one.`;
+      document.querySelector(".alert-close").classList.remove("hidden");
+      document.querySelector(".alert-close").addEventListener("click", closeAlert);
+      break;
+
+    // Malfunction
+    case 418:
+      callMalfunction();
+      break;
+
+    default:
+      break;
+  }
+}
+
 async function loginWithAccount() {
   const usernameInput = document.querySelector("input[name='username']").value;
   const passwordInput = document.querySelector("input[name='password']").value;
@@ -89,19 +132,8 @@ async function loginWithAccount() {
   if (response.ok) {
     window.localStorage.setItem("isLoggedIn", true);
     showQuizPage();
-  }
-
-  // Non-existed username or wrong password
-  else if (response.status === 404) {
-    document.querySelector(".alert-container").classList.remove("alert-container-visible");
-    document.querySelector(".slogan").textContent = "Wrong user name or password."
-    document.querySelector(".slogan").style.backgroundColor = "white";
-    document.querySelector(".slogan").style.padding = "6px";
-  }
-
-  // Malfunction
-  else if (response.status === 418) {
-    callMalfunction();
+  } else {
+    showLoginErrorMessage(response.status);
   }
 }
 
@@ -123,26 +155,7 @@ async function registerNewUser() {
 
   const response = await connect(postRequest);
 
-  // Register successfully
-  if (response.ok) {
-    document.querySelector(".alert-box").classList.remove("contacting-server");
-    document.querySelector(".alert-text").innerHTML = `Registration Complete. <br>Please proceed to login.`;
-    document.querySelector(".alert-close").classList.remove("hidden");
-    document.querySelector(".alert-close").addEventListener("click", closeAlert);
-  }
-
-  // The user_name is already in the register
-  else if (response.status === 409) {
-    document.querySelector(".alert-box").classList.remove("contacting-server");
-    document.querySelector(".alert-text").innerHTML = `Sorry! That name is taken. <br>Please try with another one.`;
-    document.querySelector(".alert-close").classList.remove("hidden");
-    document.querySelector(".alert-close").addEventListener("click", closeAlert);
-  }
-
-  // Malfunction
-  else if (response.status === 418) {
-    callMalfunction();
-  }
+  displayRegisterResult(response.status);
 }
 
 function closeAlert() {

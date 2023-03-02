@@ -1,12 +1,13 @@
 "use strict"
 if (window.localStorage.getItem("isLoggedIn")) {
+  callContactingServer();
   showQuizPage();
   document.querySelector(".userName").textContent = localStorage.getItem("userName");
 };
 
 document.querySelector(".logout-button").addEventListener("click", logoutFromAccount);
 
-function showQuizPage() {
+function showGettingRandomImageMessage() {
   loginPage.querySelector(".container").classList.remove("login-container");
   loginPage.querySelector(".container").classList.add("quiz-container");
   document.querySelector(".alert-text").textContent = "Getting a random image...";
@@ -15,18 +16,20 @@ function showQuizPage() {
     <img class="dog-background-image" src="media/logo.png" alt="dog_logo">
     <div class="options"></div>
   `;
-  setTimeout(async () => {
-    document.querySelector(".alert-container").classList.remove("alert-container-visible");
-    const dogOptions = getRandomFourDogs();
-    createQuizButton(dogOptions);
-    const shownDog = getOneRandomDogFromQuizOptions(dogOptions);
-    const shownDogURL = await getDog(shownDog);
+}
 
-    setTimeout(() => {
-      getDogImg(shownDogURL);
-    }, 50);
+async function showQuizPage() {
+  showGettingRandomImageMessage();
 
-  }, 500);
+  const dogOptions = getRandomFourDogs();
+  const shownDog = getOneRandomDogFromQuizOptions(dogOptions);
+
+  const shownDogURL = await getDog(shownDog);
+
+  document.querySelector(".alert-container").classList.remove("alert-container-visible");
+
+  createQuizButtons(dogOptions);
+  insertDogImg(shownDogURL);
 }
 
 function getRandomFourDogs() {
@@ -38,7 +41,7 @@ function getRandomFourDogs() {
   return randomQuizOptions;
 }
 
-function createQuizButton(dogOptions) {
+function createQuizButtons(dogOptions) {
   for (let i = 0; i < 4; i++) {
     const quizButton = document.createElement("button");
     quizButton.classList.add("quiz-option");
@@ -62,7 +65,7 @@ async function getDog(shownDog) {
   return randomDogFromBreedArray;
 }
 
-function getDogImg(shownDogURL) {
+function insertDogImg(shownDogURL) {
   document.querySelector(".dog-background-image").classList.add("hidden");
 
   const dogPicture = document.createElement("img");
@@ -83,7 +86,7 @@ function getRandomNumber(max, min = 0) {
 }
 
 function tellCorrectOrNot(event) {
-  const chosenDogOption = event.target.textContent.split(' ');;
+  const chosenDogOption = event.target.textContent.split(' ');
   const shownDog = document.querySelector(".shown-dog-picture").src;
   if (shownDog.includes(chosenDogOption[0]) && shownDog.includes(chosenDogOption[1])) {
     // Correct answer
